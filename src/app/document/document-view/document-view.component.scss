@@ -1,0 +1,67 @@
+@use 'variables' as vars;
+
+:host {
+  background-color: #fff;
+  min-width: 50%;
+  max-width: 900px;
+  height: calc(100% - 180px);
+  display: block;
+  overflow: hidden;
+  padding: vars.$base-gutter;
+  margin: vars.$base-gutter auto;
+
+  .document-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .document-header {
+      &__zoom-actions, &__title {
+        margin-bottom: vars.$base-gutter;
+      }
+    }
+
+    .document-pages {
+      height: calc(100% - 180px);
+      overflow: auto;
+
+      &__annotations {
+        display: flex;
+        align-items: center;
+        flex-flow: wrap;
+        gap: calc(vars.$base-gutter / 2);
+
+        .drag-element {
+          display: flex;
+          align-items: center;
+          gap: calc(vars.$base-gutter / 5);
+          cursor: move;
+          padding: calc(vars.$base-gutter / 5);
+          border: 1px solid #757575;
+          border-radius: calc(vars.$base-gutter / 2);
+
+          &__dragged {
+            background-color: #fff59d;
+          }
+
+          &__remove {
+            cursor: default;
+          }
+        }
+      }
+    }
+
+    .document-footer {
+      text-align: right;
+      margin-top: vars.$base-gutter;
+    }
+
+    .loading {
+      height: calc(100vh - 180px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

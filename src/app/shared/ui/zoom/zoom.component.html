@@ -1,0 +1,21 @@
+<div class="zoom">
+  <div class="zoom_percentage">
+    {{ zoom | percent }}
+  </div>
+  <button
+    matMiniFab
+    matTooltip="Уменьшить размер"
+    [disabled]="zoomOutDisabled"
+    (click)="onZoomOut()"
+  >
+    <mat-icon>zoom_out</mat-icon>
+</button>
+<button
+  matMiniFab
+  matTooltip="Увеличить размер"
+  [disabled]="zoomInDisabled"
+  (click)="onZoomIn()"
+  >
+    <mat-icon>zoom_in</mat-icon>
+  </button>
+</div>

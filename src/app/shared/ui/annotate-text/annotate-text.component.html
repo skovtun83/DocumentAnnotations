@@ -1,0 +1,19 @@
+<div class="annotations">
+  <button matButton="elevated" class="annotations__button" (click)="toggleForm()">
+    <mat-icon>{{ !showForm ? 'edit' : 'close' }}</mat-icon>
+    {{ !showForm ? 'Добавить аннотации' : 'Закрыть' }}
+  </button>
+  <div *ngIf="showForm" class="annotations__form">
+    <mat-form-field>
+      <mat-label>Аннотации</mat-label>
+      <textarea
+        #annotationInput
+        matInput
+        placeholder="Введите текст"
+        [formControl]="annotationControl"
+        (blur)="onAdd()"
+        (keydown.enter)="annotationInput.blur()"
+      ></textarea>
+    </mat-form-field>
+  </div>
+</div>

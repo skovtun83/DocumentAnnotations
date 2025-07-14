@@ -1,0 +1,24 @@
+@use 'variables' as vars;
+
+:host ::ng-deep .annotations {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$base-gutter;
+  margin-bottom: vars.$base-gutter;
+
+  &__button {
+    width: fit-content;
+  }
+
+  &__form {
+    width: 100%;
+
+    .mat-mdc-form-field {
+      width: 100%;
+
+      .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+      }
+    }
+  }
+}

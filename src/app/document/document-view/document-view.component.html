@@ -1,0 +1,56 @@
+<div class="document-container">
+  <ng-container *ngIf="document$ | async as document; else loading">
+    <div class="document-header">
+      <div class="document-header__zoom-actions">
+        <app-zoom (zoomScale)="getZoomScale($event)" />
+      </div>
+      <div class="document-header__title">
+        <h1 class="document-title">
+          Название документа: {{ document.name | titlecase }}
+        </h1>
+      </div>
+      <div class="document-header__annotations">
+        <app-annotate-text (change)="onAddAnnotation($event)" />
+      </div>
+    </div>
+    <div scrollPosition class="document-pages" (scrollPosition)="onScroll($event)">
+      <div class="document-pages__annotations">
+        <div
+          *ngFor="let annotation of annotations; let i = index"
+          class="drag-element"
+          cdkDrag
+          cdkDragBoundary=".document-pages"
+          [cdkDragFreeDragPosition]="dragPosition[i]"
+          [ngStyle]="{ zoom: zoomScale }"
+          [ngClass]="getDraggedStyleClass(i)"
+          (cdkDragEnded)="onDragEnd($event, i)"
+        >
+          <span class="drag-element__drag">
+            <mat-icon>drag_indicator</mat-icon>
+          </span>
+          <span>
+            {{ annotation }}
+          </span>
+          <span class="drag-element__remove" (click)="onRemoveAnnotation(i)">
+            <mat-icon>cancel</mat-icon>
+          </span>
+        </div>
+      </div>
+      <div
+        *ngFor="let page of document.pages"
+        class="document-pages__page"
+        [ngStyle]="{ zoom: zoomScale }"
+      >
+        <img [src]="'assets/' + page.imageUrl" />
+      </div>
+    </div>
+    <div class="document-footer">
+      <button matButton="elevated" (click)="onSaveDocument(document)">Сохранить</button>
+    </div>
+  </ng-container>
+  <ng-template #loading>
+    <div class="loading">
+      <mat-spinner class="spinner" />
+    </div>
+  </ng-template>
+</div>
